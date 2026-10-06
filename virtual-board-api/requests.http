@@ -1,0 +1,38 @@
+@baseUrl = http://localhost:3002
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYXhlbCIsImlhdCI6MTc5MTE5NzA5MywiZXhwIjoxNzkxMjA0MjkzfQ.quTDVLRn6C7YGmmrkb3sDVwOK3WbUfHXUz-4wnT5hEY
+
+### Health - no token needed
+GET {{baseUrl}}/health
+
+### Get boards
+GET {{baseUrl}}/boards
+Authorization: Bearer {{token}}
+
+### Get notes in board 1
+GET {{baseUrl}}/boards/1/notes
+Authorization: Bearer {{token}}
+
+### Create note
+POST {{baseUrl}}/boards/1/notes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "text": "REST Client test note",
+  "x": 100,
+  "y": 120,
+  "color": "yellow"
+}
+
+### Update note 1
+PATCH {{baseUrl}}/notes/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "text": "Updated from VSCode REST Client"
+}
+
+### Delete note 1
+DELETE {{baseUrl}}/notes/1
+Authorization: Bearer {{token}}
