@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Board {
+  id        Int           @id @default(autoincrement())
+  name      String
+  createdAt DateTime      @default(now())
+  notes     Note[]
+  access    BoardAccess[]
+}
+
+model BoardAccess {
+  id      Int   @id @default(autoincrement())
+  userId  Int
+  boardId Int
+  board   Board @relation(fields: [boardId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, boardId])
+  @@index([userId])
+}
+
+model Note {
+  id        Int      @id @default(autoincrement())
+  text      String   @default("")
+  x         Int      @default(40)
+  y         Int      @default(40)
+  color     String   @default("yellow")
+  boardId   Int
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([boardId])
+}
