@@ -1,0 +1,22 @@
+@baseUrl = http://localhost:3001
+
+### Health
+GET {{baseUrl}}/health
+
+### Create user
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "username": "axel",
+  "password": "axel1234"
+}
+
+### Login
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+  "username": "axel",
+  "password": "axel1234"
+}
